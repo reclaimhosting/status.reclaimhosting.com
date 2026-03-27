@@ -1,1 +1,1 @@
-# Notifications for status.reclaimhosting.com
+# Incident and Maintenance Notifications for Reclaim Hosting
