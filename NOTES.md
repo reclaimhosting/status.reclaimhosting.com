@@ -1,20 +1,17 @@
-# Uptime Kuma Status Page util
+# status.reclaimhosting.com -> GH issue sync script
 
 A Python script that:
 
 1. Reads active/upcoming maintenance + incidents from Uptime Kuma 2.x using MySQL or MariaDB.
 2. Creates/updates GitHub issues for each active event.
 3. Automatically closes managed issues when the event is no longer active.
-4. Optionally keeps an Uptime Kuma status page in sync with all non-paused monitors, excluding monitors with ignored tags.
-
-
-## More info
-- Refer to [`env.example`](env.example) for configuration information and options
-- `MANAGE_STATUS_PAGE` sync options automatically manages monitors on a specific page in a spefic group:
-  - Add all monitors to the page/group
+4. Manages monitors on an Uptime Kuma status page:
+  - Add all monitors to the specified page/group
   - Remove paused monitors
   - Sort them alphabetically
-  - Monitors with tags from `IGNORE_TAGS` can be excluded
+  - Exclude monitors with tags from `IGNORE_TAGS`
+
+Refer to [`env.example`](env.example) for all configuration information and options
 
 ## Local testing
 
