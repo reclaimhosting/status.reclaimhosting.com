@@ -1,7 +1,0 @@
-- [ ] Set up api token not tied to Taylor's github profile
-- [ ] Review all automated message templates
-  - Remove "status" boilerplate. consider including links back to status.reclaimhosting.com for all updates
-- [ ] Make maintenance issues close when the window is over
-- [ ] Create a README with instructions for subscribing
-- [ ] Set up on DO
-- [ ] Link to this from status.reclaimhosting.com
