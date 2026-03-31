@@ -1,9 +1,9 @@
 # Incidents and Maintenance for Reclaim Hosting
 All incidents and maintenace from [status.reclaimhosting.com](https://status.reclaimhosting.com) are mirrored as [issues](https://github.com/reclaimhosting/status.reclaimhosting.com/issues) to this repository.
 
-[‼️ Ongoing Incidents and Maintenance](https://github.com/reclaimhosting/status.reclaimhosting.com/issues)
+[‼️ Current Incidents and Maintenance](https://github.com/reclaimhosting/status.reclaimhosting.com/issues?q=is%3Aissue%20sort%3Aupdated-desc%20state%3Aopen)
 
-[🗄️ Past Incidents and Maintenance](https://github.com/reclaimhosting/status.reclaimhosting.com/issues?q=is%3Aissue%20state%3Aclosed)
+[🗄️ Past Incidents and Maintenance](https://github.com/reclaimhosting/status.reclaimhosting.com/issues?q=is%3Aissue%20sort%3Aupdated-desc%20state%3Aclosed)
 
 ## Notifications
 Email notifications require a free GitHub account. You can visit an individual issue thread and use the **Notifications** widget in the sidebar to subscribe to notifications for a specific incident or maintenance event.
