@@ -826,7 +826,7 @@ def close_issue(repo: str, token: str, issue_number: int) -> None:
         "POST",
         f"https://api.github.com/repos/{repo}/issues/{issue_number}/comments",
         token,
-        json={"body": "Auto-closing because this incident/maintenance is no longer active."},
+        json={"body": "This incident/maintenance is no longer active. Closing issue."},
     )
     gh_request(
         "PATCH",
