@@ -26,6 +26,8 @@ class Event:
     status: str
     start_at: Optional[str]
     end_at: Optional[str]
+    created_at: Optional[str]
+    updated_at: Optional[str]
     affected_services: List[str]
 
 
@@ -191,6 +193,9 @@ def fetch_events_from_table(db: DBClient, table: str, now: datetime) -> List[Eve
     description_col = first_existing(columns, ["description", "content", "message", "body"])
     start_col = first_existing(columns, ["start_date", "start_at", "start", "from", "scheduled_for"])
     end_col = first_existing(columns, ["end_date", "end_at", "end", "to", "scheduled_until"])
+    kind = choose_kind(table)
+    created_col = first_existing(columns, ["created_date"]) if kind == "incident" else None
+    updated_col = first_existing(columns, ["last_updated_date"]) if kind == "incident" else None
 
     if not id_col or not title_col:
         return []
@@ -207,13 +212,15 @@ def fetch_events_from_table(db: DBClient, table: str, now: datetime) -> List[Eve
         events.append(
             Event(
                 key=f"{table}:{row.get(id_col)}",
-                kind=choose_kind(table),
+                kind=kind,
                 title=title,
                 description=str(row.get(description_col, "") or "").strip(),
                 status=normalize_status(row, columns),
                 start_at=str(row.get(start_col)) if start_col and row.get(start_col) is not None else None,
                 end_at=str(row.get(end_col)) if end_col and row.get(end_col) is not None else None,
-                affected_services=fetch_maintenance_monitors(db, row.get(id_col)) if choose_kind(table) == "maintenance" else [],
+                created_at=str(row.get(created_col)) if created_col and row.get(created_col) is not None else None,
+                updated_at=str(row.get(updated_col)) if updated_col and row.get(updated_col) is not None else None,
+                affected_services=fetch_maintenance_monitors(db, row.get(id_col)) if kind == "maintenance" else [],
             )
         )
     return events
@@ -670,6 +677,8 @@ def event_fingerprint(event: Event) -> str:
             "status": event.status,
             "start_at": event.start_at,
             "end_at": event.end_at,
+            "created_at": event.created_at,
+            "updated_at": event.updated_at,
             "affected_services": event.affected_services,
         },
         sort_keys=True,
@@ -696,6 +705,10 @@ def event_lines(event: Event, include_services: bool = True) -> List[str]:
         lines.append(f"- **Starts**: {event.start_at}")
     if has_known_value(event.end_at):
         lines.append(f"- **Ends**: {event.end_at}")
+    if has_known_value(event.created_at):
+        lines.append(f"- **Created**: {event.created_at}")
+    if has_known_value(event.updated_at):
+        lines.append(f"- **Last updated**: {event.updated_at}")
     lines.extend(["", "### Details", event.description or "(No description provided)"])
     if include_services and event.affected_services:
         lines.extend(["", f"### {affected_services_title()}", ", ".join(event.affected_services)])

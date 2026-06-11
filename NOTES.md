@@ -32,7 +32,7 @@ docker build -t uptime-kuma-status-page-utils . && docker run --rm --env-file .e
 - [ ] Review all automated message templates
   - Remove "status" boilerplate. consider including links back to status.reclaimhosting.com for all updates
 - [ ] Test if maintenance issues automatically close when the window is over
-- [ ] Include the update timestamp from Uptime Kuma because github's issue display doesn't do a great job of this
+- [x] Include the update timestamp from Uptime Kuma because github's issue display doesn't do a great job of this
 - [x] Create a README with instructions for subscribing
 - [x] Deploy to DO app platform
 - [x] Link to this from status.reclaimhosting.com
